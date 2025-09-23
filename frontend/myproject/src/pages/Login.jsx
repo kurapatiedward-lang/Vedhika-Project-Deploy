@@ -24,15 +24,55 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input type="email" placeholder="Email" value={email}
-          onChange={(e) => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Password" value={password}
-          onChange={(e) => setPassword(e.target.value)} required />
-        <button type="submit">Login</button>
-      </form>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-400 animate-fade-in">
+      <div className="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-md flex flex-col items-center gap-4 border border-blue-100 animate-slide-up">
+        <div className="flex flex-col items-center mb-4">
+          <img src="https://ui-avatars.com/api/?name=ETMS&background=2563eb&color=fff&size=96" alt="Logo" className="rounded-full shadow-md mb-2" />
+          <h2 className="text-3xl font-extrabold mb-2 text-blue-700 tracking-wide">Welcome Back</h2>
+          <p className="text-gray-500 text-sm">Sign in to your account</p>
+        </div>
+        <form onSubmit={handleLogin} className="w-full space-y-5">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+            />
+          </div>
+          <div className="flex items-center justify-between text-sm mb-2">
+            <a href="#" className="text-blue-500 hover:underline">Forgot Password?</a>
+            <a href="#" className="text-blue-500 hover:underline">Sign Up</a>
+          </div>
+          <button
+            type="submit"
+            className="w-full py-2 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold rounded-lg shadow hover:from-blue-700 hover:to-blue-600 transition duration-200"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+      {/* Animations */}
+      <style>{`
+        .animate-fade-in { animation: fadeIn 1s ease; }
+        .animate-slide-up { animation: slideUp 0.8s cubic-bezier(.4,0,.2,1); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      `}</style>
     </div>
   );
 }
