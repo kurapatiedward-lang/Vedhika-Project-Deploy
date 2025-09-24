@@ -4,7 +4,7 @@ from .models import User
 
 class UserAdmin(BaseUserAdmin):
     # Fields to display in admin list
-    list_display = ("email", "full_name", "role", "is_staff", "is_superuser", "created_at")
+    list_display = ("email", "full_name","contact_info","employee_id", "role", "is_staff", "is_superuser", "created_at")
     list_filter = ("role", "is_staff", "is_superuser")
     search_fields = ("email", "full_name")
     ordering = ("email",)
