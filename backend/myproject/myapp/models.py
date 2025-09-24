@@ -47,3 +47,9 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+
+
+#----------------# Other models can be defined here as needed----------------------#
+
