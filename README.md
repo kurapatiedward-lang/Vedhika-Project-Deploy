@@ -8,8 +8,17 @@ This is a full-stack web application built using Django and React.
 - Database: Postgresql (development)
 - Authentication: JWT
 - Version Control: Git & GitHub
-
+- 
 ## Project Structure
+backend/
+  myproject/
+    manage.py
+    requirements.txt
+
+frontend/
+  myproject/
+    src/
+    package.json
 
 
 ## How to Run Locally
@@ -26,3 +35,10 @@ python manage.py runserver
 cd frontend/myproject
 npm install
 npm start
+
+## Deployment
+
+- Backend can be deployed using Gunicorn + Nginx
+- Frontend can be built using `npm run build`
+- CI/CD can be handled using GitHub Actions
+
