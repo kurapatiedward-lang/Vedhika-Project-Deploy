@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
+import img from "../assets/vedhika.jpeg";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -11,6 +12,7 @@ function Login() {
     e.preventDefault();
     try {
       const res = await api.post("login/", { email, password });
+
       localStorage.setItem("access", res.data.access);
       localStorage.setItem("refresh", res.data.refresh);
       localStorage.setItem("role", res.data.role);
@@ -24,54 +26,88 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-400 animate-fade-in">
-      <div className="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-md flex flex-col items-center gap-4 border border-blue-100 animate-slide-up">
-        <div className="flex flex-col items-center mb-4">
-          <img src="https://ui-avatars.com/api/?name=ETMS&background=2563eb&color=fff&size=96" alt="Logo" className="rounded-full shadow-md mb-2" />
-          <h2 className="text-3xl font-extrabold mb-2 text-blue-700 tracking-wide">Welcome Back</h2>
-          <p className="text-gray-500 text-sm">Sign in to your account</p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-blue-200 to-blue-400 px-4">
+      
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 animate-slide-up">
+        
+        {/* Logo */}
+        <div className="flex flex-col items-center mb-6">
+          <img
+            src={img}
+            alt="Logo"
+            className="w-24 h-24 rounded-full object-cover shadow-lg mb-3 border-4 border-blue-200"
+          />
+          <h1 className="text-2xl font-extrabold text-blue-700 tracking-wide">
+            VEEDHI | KURAKULAS
+          </h1>
+          <p className="text-gray-500 text-sm mt-1">
+            Sign in to continue
+          </p>
         </div>
-        <form onSubmit={handleLogin} className="w-full space-y-5">
+
+        {/* Form */}
+        <form onSubmit={handleLogin} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Email Address
+            </label>
             <input
               type="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
             />
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Password
+            </label>
             <input
               type="password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
             />
           </div>
-          <div className="flex items-center justify-between text-sm mb-2">
-            <a href="#" className="text-blue-500 hover:underline">Forgot Password?</a>
-            <a href="#" className="text-blue-500 hover:underline">Sign Up</a>
-          </div>
+
+          {/* <div className="flex justify-between text-sm">
+            <a href="#" className="text-blue-600 hover:underline">
+              Forgot password?
+            </a>
+            <a href="#" className="text-blue-600 hover:underline">
+              Sign up
+            </a>
+          </div> */}
+
           <button
             type="submit"
-            className="w-full py-2 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold rounded-lg shadow hover:from-blue-700 hover:to-blue-600 transition duration-200"
+            className="w-full py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold shadow-md hover:from-blue-700 hover:to-blue-600 transition duration-300"
           >
             Login
           </button>
         </form>
       </div>
+
       {/* Animations */}
       <style>{`
-        .animate-fade-in { animation: fadeIn 1s ease; }
-        .animate-slide-up { animation: slideUp 0.8s cubic-bezier(.4,0,.2,1); }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .animate-slide-up {
+          animation: slideUp 0.8s cubic-bezier(.4,0,.2,1);
+        }
+        @keyframes slideUp {
+          from {
+            transform: translateY(40px);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
       `}</style>
     </div>
   );

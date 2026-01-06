@@ -1,0 +1,105 @@
+/* Inactive Employee List styles (based on ActiveEmpList) */
+.list-container {
+    padding: 20px;
+}
+
+.list-header h2 {
+    margin: 0 0 6px 0;
+    font-size: 22px;
+    color: #222;
+}
+
+.list-header p {
+    margin: 0 0 14px 0;
+    color: #666;
+    font-size: 13px;
+}
+
+.list-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.list-table thead th {
+    background: #6c757d;
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.list-table tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 14px;
+    color: #333;
+}
+
+.list-table tbody tr:hover td {
+    background: #fbfbff;
+}
+
+.activate-btn {
+    background: #198754;
+    color: #fff;
+    border: 0;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.activate-btn i {
+    font-size: 16px;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.pagination .btn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+}
+
+.pagination .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width:768px) {
+    .list-table thead {
+        display: none;
+    }
+
+    .list-table tbody td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .list-table tbody tr {
+        margin-bottom: 12px;
+        display: block;
+        border: 1px solid #f1f1f1;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+}

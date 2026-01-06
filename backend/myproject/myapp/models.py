@@ -54,3 +54,131 @@ class User(AbstractUser):
 
 #----------------# Other models can be defined here as needed----------------------#
 
+# Department table
+
+class Department(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+    
+
+#-------------------------------------------------------------------------------#
+
+# Designation table
+
+
+class Designation(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='designations')
+    status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
+#-------------------------------------------------------------------------------#
+
+
+# Update BranchState model in models.py
+class BranchState(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    status = models.BooleanField(default=True)  # Add this field
+    
+    def __str__(self):
+        return self.name
+
+
+class BranchLocation(models.Model):
+    branch_state = models.ForeignKey(BranchState, on_delete=models.CASCADE, related_name='branch_locations')
+    name = models.CharField(max_length=100)
+    status = models.BooleanField(default=True)  # Add this field
+    
+    def __str__(self):
+        return f"{self.name} ({self.branch_state.name})"
+
+
+
+
+
+#-------------------------------------------------------------------------------#
+#-------------------------------------------------------------------------------#
+
+# SubLocation table
+
+class SubLocation(models.Model):
+    name = models.CharField(max_length=100)
+    branch_state = models.ForeignKey(BranchState, on_delete=models.CASCADE, related_name='sublocations')
+    branch_location = models.ForeignKey(BranchLocation, on_delete=models.CASCADE, related_name='sublocations')
+    status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        unique_together = ['name', 'branch_location']  # Unique name per location
+
+
+# Pincode table
+class Pincode(models.Model):
+    pincode = models.CharField(max_length=6, unique=True)
+    branch_state = models.ForeignKey(BranchState, on_delete=models.CASCADE, related_name='pincodes')
+    branch_location = models.ForeignKey(BranchLocation, on_delete=models.CASCADE, related_name='pincodes')
+    sub_location = models.ForeignKey(SubLocation, on_delete=models.CASCADE, related_name='pincodes')
+    status = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.pincode} - {self.sub_location.name} / {self.branch_location.name} / {self.branch_state.name}"
+
+    class Meta:
+        ordering = ['-created_at']
+
+
+
+
+
+
+class BranchInnerState(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    status = models.BooleanField(default=True)  # Add this field
+    
+    def __str__(self):
+        return self.name
+
+
+# BranchInnerLocation: inner locations tied to an inner state and optional branch location
+class BranchInnerLocation(models.Model):
+    name = models.CharField(max_length=100)
+    branch_inner_state = models.ForeignKey(BranchInnerState, on_delete=models.CASCADE, related_name='inner_locations')
+    branch_location = models.ForeignKey(BranchLocation, on_delete=models.CASCADE, related_name='inner_locations', null=True, blank=True) # optional
+    status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.branch_inner_state.name})"
+
+    class Meta:
+        unique_together = ['name', 'branch_inner_state']
+
+
+
+
+
+
+class Bank(models.Model):
+    bank_name = models.CharField(max_length=100, unique=True)
+    status = models.BooleanField(default=True)  # Add this field
+    
+    def __str__(self):
+        return self.bank_name
+
+
+
+
+class TypeOfAccount(models.Model):
+    account_type = models.CharField(max_length=100, unique=True)
+    status = models.BooleanField(default=True)  # Add this field
+    
+    def __str__(self):
+        return self.account_type

@@ -1,6 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User
+from .models import (
+    User, Department, Designation, BranchState, BranchLocation, 
+    SubLocation, BranchInnerState, BranchInnerLocation, Pincode,Bank, TypeOfAccount
+)  
 
 class UserAdmin(BaseUserAdmin):
     # Fields to display in admin list
@@ -29,3 +32,17 @@ class UserAdmin(BaseUserAdmin):
 
 # Register User model with custom admin
 admin.site.register(User, UserAdmin)
+
+
+# admin the models here
+
+admin.site.register(Department)
+admin.site.register(Designation)
+admin.site.register(BranchState)
+admin.site.register(BranchLocation)
+admin.site.register(SubLocation)
+admin.site.register(Pincode)
+admin.site.register(BranchInnerState)
+admin.site.register(BranchInnerLocation)
+admin.site.register(Bank)
+admin.site.register(TypeOfAccount)
