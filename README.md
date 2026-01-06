@@ -5,7 +5,7 @@ This is a full-stack web application built using Django and React.
 ## Tech Stack
 - Backend: Django, Django REST Framework
 - Frontend: React.js
-- Database: SQLite (development)
+- Database: Postgresql (development)
 - Authentication: JWT
 - Version Control: Git & GitHub
 
